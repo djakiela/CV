@@ -15,6 +15,26 @@ export default {
 
       return result.trim()
     },
+
+    calculateDateBackNow(start) {
+      const [startMonth, startYear] = start.split('.').map(Number)
+
+      const now = new Date()
+      const currentMonth = now.getMonth() + 1
+      /**
+       * * getMonth() return months 0-11
+       */
+      const currentYear = now.getFullYear()
+
+      let months = (currentYear - startYear) * 12 + (currentMonth - startMonth)
+      const years = Math.floor(months / 12)
+      months = months % 12
+
+      let result = ''
+      if (years > 0) result += `${years} ${years === 1 ? 'rok' : 'lata'}`
+      if (months > 0) result += ` ${months} mies.`
+      return result.trim()
+    },
   },
 }
 </script>
@@ -24,6 +44,18 @@ export default {
     <ul>
       <li>
         <a
+          >04.2025 - obecnie
+          <span> ({{ calculateDateBackNow('04.2025') }}) </span>
+        </a>
+        <h3>
+          ▶ Wyższa Szkoła Informatyki i Zarządzania w siedzibą w Rzeszowie
+        </h3>
+        <p>Kierunek: Cyberbezpieczeństwo</p>
+        <p>Wykształcenie: <b>Wyższe - Magister</b></p>
+        <p></p>
+      </li>
+      <li>
+        <a
           >10.2021 - 03.2025
           <span> ({{ calculateDate('10.2021', '03.2025') }}) </span>
         </a>
@@ -31,7 +63,7 @@ export default {
           ▶ Wyższa Szkoła Informatyki i Zarządzania w siedzibą w Rzeszowie
         </h3>
         <p>Kierunek: Informatyka - Technologie Internetowe i Mobilne</p>
-        <p>Poziom wykształcenia: <b>wyższe - inżynier</b></p>
+        <p>Wykształcenie: <b>Wyższe - Inżynier</b></p>
         <p></p>
       </li>
       <li>
@@ -41,7 +73,7 @@ export default {
         </a>
         <h3>▶ II Liceum Ogólnokształcące im. Konstytucji 3 maja w Krośnie</h3>
         <p>Kierunek: Matematyczno-Fizyczny z Informatyką</p>
-        <p>Poziom wykształcenia: <b>średnie</b></p>
+        <p>Wykształcenie: <b>Średnie</b></p>
       </li>
     </ul>
   </section>
